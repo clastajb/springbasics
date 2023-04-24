@@ -1,7 +1,9 @@
 package com.antsrl.formazione.simpledemo;
 
 import com.antsrl.formazione.simpledemo.bean.Car;
+import com.antsrl.formazione.simpledemo.bean.Truck;
 import com.antsrl.formazione.simpledemo.config.AppConfig;
+import com.antsrl.formazione.simpledemo.config.EngineConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
@@ -10,12 +12,17 @@ public class Main {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(AppConfig.class);
+        context.register(EngineConfig.class);
         context.refresh();
 
         Car car = context.getBean(Car.class);
+        Truck truck = context.getBean(Truck.class);
 
         car.engineStart();
         car.go();
+
+        truck.engineStart();
+        truck.go();
 
     }
 }
