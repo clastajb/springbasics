@@ -30,9 +30,12 @@ public class TransportService {
         car.engineStart();
         car.go();
 
+        // calling loadCargo() programmatically
         mailDeliveryTruck.engineStart();
+        mailDeliveryTruck.loadCargo();
         mailDeliveryTruck.go();
 
+        // no need to explicitly call loadCargo() !!
         watermellonShippingTruck.engineStart();
         watermellonShippingTruck.go();
 

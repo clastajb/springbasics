@@ -6,6 +6,10 @@ public class Truck {
 
     private Engine engine;
 
+    public void loadCargo(){
+        System.out.println("loading my cargo!");
+    }
+
     public void engineStart(){
         System.out.println("I'm the king of the road!! get out of the way!");
     }

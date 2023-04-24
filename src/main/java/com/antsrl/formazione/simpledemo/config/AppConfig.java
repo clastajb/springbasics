@@ -22,7 +22,7 @@ public class AppConfig {
         return truck;
     }
 
-    @Bean
+    @Bean(initMethod = "loadCargo")
     public Truck electricTruck(@Qualifier("electricEngine") Engine engine){
         Truck truck = new Truck();
         truck.setEngine(engine);
