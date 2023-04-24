@@ -16,7 +16,14 @@ public class AppConfig {
     }
 
     @Bean
-    public Truck truck(@Qualifier("endothermicEngine") Engine engine){
+    public Truck endothermicTruck(@Qualifier("endothermicEngine") Engine engine){
+        Truck truck = new Truck();
+        truck.setEngine(engine);
+        return truck;
+    }
+
+    @Bean
+    public Truck electricTruck(@Qualifier("electricEngine") Engine engine){
         Truck truck = new Truck();
         truck.setEngine(engine);
         return truck;
