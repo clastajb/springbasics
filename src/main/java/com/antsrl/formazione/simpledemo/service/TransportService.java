@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class TransportService {
+
+    @Autowired
+    @Qualifier("optionalBusinessService")
+    Optional<Object> businessService;
 
     @Autowired
     private Car car;
@@ -39,5 +45,8 @@ public class TransportService {
         watermellonShippingTruck.engineStart();
         watermellonShippingTruck.go();
 
+        businessService.ifPresentOrElse(
+                businessService -> System.out.println("businessService is available!"),
+                () -> System.out.println("businessService not provided"));
     }
 }
