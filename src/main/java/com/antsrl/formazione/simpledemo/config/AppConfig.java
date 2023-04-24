@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Bean;
 public class AppConfig {
 
     @Bean
-    public Car car(){
+    public Car car(Engine engine){
         Car car = new Car();
-        car.setEngine(endothermicEngine());
+        car.setEngine(engine);
         return car;
     }
 
+    @Bean
     public Engine endothermicEngine(){
         return new EndothermicEngine();
     }
