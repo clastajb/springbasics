@@ -2,19 +2,20 @@ package com.antsrl.formazione.simpledemo.service;
 
 import com.antsrl.formazione.simpledemo.bean.Car;
 import com.antsrl.formazione.simpledemo.bean.Truck;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TransportService {
 
-    private final Car car;
-    private final Truck truck;
+    @Autowired
+    private Car car;
 
-    public TransportService(Car car, Truck truck) {
+    @Autowired
+    private Truck truck;
+
+    public TransportService() {
         System.out.println("preparing for transportation");
-
-        this.car = car;
-        this.truck = truck;
     }
 
     public void movingStuffAroundTheWorld(){
