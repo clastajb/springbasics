@@ -3,6 +3,7 @@ package com.antsrl.formazione.simpledemo;
 import com.antsrl.formazione.simpledemo.bean.Car;
 import com.antsrl.formazione.simpledemo.service.GeolocationService;
 import com.antsrl.formazione.simpledemo.service.TransportService;
+import com.antsrl.formazione.simpledemo.service.UselessService;
 import com.antsrl.formazione.simpledemo.utils.Utils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -28,5 +29,8 @@ public class Main {
 
         Utils.trueOrThrow("transportService should be always the same object!", () -> Objects.equals(transportService, transportServiceAgain));
         Utils.trueOrThrow("cars should NOT be the same object!", () -> !Objects.equals(redCar, blueCar));
+
+        UselessService uselessService = context.getBean(UselessService.class);
+        uselessService.doingUselessStuffAroundTheWorld();
     }
 }
