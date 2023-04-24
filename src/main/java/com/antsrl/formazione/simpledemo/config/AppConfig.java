@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({
+        PropertiesConfig.class,
+        BusinessConfig.class,
         CarConfig.class,
         TruckConfig.class,
         EngineConfig.class})
