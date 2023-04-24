@@ -9,8 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                "com.antsrl.formazione.simpledemo.service",
-                "com.antsrl.formazione.simpledemo.config");
+                "com.antsrl.formazione.simpledemo");
 
         TransportService transportService = context.getBean(TransportService.class);
         transportService.movingStuffAroundTheWorld();
