@@ -42,6 +42,12 @@
 
 <p>Benvenuto!</p>
 
+<div>
+    <form method="post" th:action="@{/}" th:object="${song}" >
+        <input type="submit" value="add song!" />
+    </form>
+</div>
+
 <table class="grid">
     <tr class="grid_header">
         <th colspan="3">

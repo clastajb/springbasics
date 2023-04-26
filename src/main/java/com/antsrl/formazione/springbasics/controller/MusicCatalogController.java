@@ -5,6 +5,7 @@ import com.antsrl.formazione.springbasics.uimodel.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +23,12 @@ public class MusicCatalogController {
         List<Song> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
+
+        return "music_catalog";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path="/")
+    public String addSong(@ModelAttribute Song song, Model model){
 
         return "music_catalog";
     }
