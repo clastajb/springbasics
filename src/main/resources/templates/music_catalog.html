@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
 
-<h1>Catalog</h1>
+    /* flower_theme */
+
+    .body{
+        color: #dddddd;
+        background-color: #406060;
+    }
+
+    .grid_header{
+        color: #333333;
+        background-color: #d96459;
+    }
+
+    .grid_row_odd{
+        color: #333333;
+        background-color: #f2ae72;
+    }
+
+    .grid_row_even{
+        color: #333333;
+        background-color: #f2e394;
+    }
+
+    .remaining_color{
+        color: #dddddd;
+        background-color: #588c7e;
+    }
+
+    /* layout_theme */
+
+    .grid{
+        width: 90%;
+    }
+
+</style>
+<body class="body">
+
+<h1>MusiCatalog</h1>
 
 <p>Benvenuto!</p>
+
+<table class="grid">
+    <tr class="grid_header">
+        <th colspan="3">
+            song list !!
+        </th>
+    </tr>
+    <tr th:each="song, iter : ${songList}" th:classappend="${iter.odd} ? grid_row_odd : grid_row_even">
+        <td th:text="${song.title}">
+            title:
+        </td>
+        <td>
+            url: <a th:href="${song.url}">go to website</a>
+        </td>
+        <td th:text="'ID: ' + ${song.id}">
+            id:
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
