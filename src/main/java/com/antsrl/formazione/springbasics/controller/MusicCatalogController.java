@@ -23,6 +23,9 @@ public class MusicCatalogController {
         List<Song> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
+        model.addAttribute("song", Song
+                .builder()
+                .build());
 
         return "music_catalog";
     }
