@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +33,11 @@ public class MusicCatalogController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path="/")
-    public String addSong(@Valid @ModelAttribute Song song, Model model){
+    public String addSong(@Valid @ModelAttribute Song song, BindingResult bindingResult, Model model){
 
-        songService.save(song);
+        if(!bindingResult.hasErrors()){
+            songService.save(song);
+        }
 
         List<Song> songList = songService.getAllSongs();
 
