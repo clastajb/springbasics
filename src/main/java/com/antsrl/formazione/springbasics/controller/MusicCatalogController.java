@@ -36,6 +36,6 @@ public class MusicCatalogController {
 
         model.addAttribute("songList", songList);
 
-        return "music_catalog";
+        return "redirect:/";
     }
 }
