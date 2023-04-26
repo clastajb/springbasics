@@ -50,4 +50,11 @@ public class SongService {
     public void save(Song song) {
         addSongInternal(song);
     }
+
+    public void delete(Long id) {
+        songList.stream()
+                .filter(song -> Objects.equals(id, song.getId()))
+                .findFirst()
+                .ifPresent(songList::remove);
+    }
 }

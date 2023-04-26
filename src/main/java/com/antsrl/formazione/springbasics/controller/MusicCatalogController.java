@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,5 +44,20 @@ public class MusicCatalogController {
         songService.save(song);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/delete/{id}")
+    public String deleteSong(@PathVariable("id") Long id, Model model){
+
+        songService.delete(id);
+
+        List<Song> songList = songService.getAllSongs();
+
+        model.addAttribute("songList", songList);
+        model.addAttribute("song", Song
+                .builder()
+                .build());
+
+        return "music_catalog";
     }
 }
