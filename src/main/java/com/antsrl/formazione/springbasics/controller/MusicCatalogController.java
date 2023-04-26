@@ -30,6 +30,12 @@ public class MusicCatalogController {
     @RequestMapping(method = RequestMethod.POST, path="/")
     public String addSong(@ModelAttribute Song song, Model model){
 
+        // save the song
+
+        List<Song> songList = songService.getAllSongs();
+
+        model.addAttribute("songList", songList);
+
         return "music_catalog";
     }
 }
