@@ -35,13 +35,15 @@ public class MusicCatalogController {
     @RequestMapping(method = RequestMethod.POST, path="/")
     public String addSong(@Valid @ModelAttribute Song song, BindingResult bindingResult, Model model){
 
-        if(!bindingResult.hasErrors()){
-            songService.save(song);
-        }
-
         List<Song> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
+
+        if(bindingResult.hasErrors()){
+            return "music_catalog";
+        }
+
+        songService.save(song);
 
         return "redirect:/";
     }

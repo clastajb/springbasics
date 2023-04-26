@@ -44,9 +44,19 @@
 
 <div>
     <form method="post" th:action="@{/}" th:object="${song}" >
-        <input type="text" th:field="*{title}" th:classappend="remaining_color" />
-        <input type="text" th:field="*{url}"  th:classappend="remaining_color"/>
-        <input type="submit" value="add song!" />
+        <div>
+            <input type="text" th:field="*{title}" th:classappend="remaining_color" />
+            <span th:if="${#fields.hasErrors('title')}"
+                  th:text="${#strings.listJoin(#fields.errors('title'), ', ')}"></span>
+        </div>
+        <div>
+            <input type="text" th:field="*{url}"  th:classappend="remaining_color"/>
+            <span th:if="${#fields.hasErrors('url')}"
+                  th:text="${#strings.listJoin(#fields.errors('url'), ', ')}"></span>
+        </div>
+        <div>
+            <input type="submit" value="add song!" />
+        </div>
     </form>
 </div>
 
