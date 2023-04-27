@@ -77,7 +77,10 @@
             id:
         </td>
         <td>
-            <a th:href="@{/delete/{id}(id=${song.id})}"><input type="button" value="X"/></a>
+            <form method="post" th:action="@{/delete}">
+                <input type="hidden" name="id" th:attr="value=${song.id}"/>
+                <input type="submit" value="X" />
+            </form>
         </td>
     </tr>
 </table>

@@ -46,8 +46,21 @@ public class MusicCatalogController {
         return "redirect:/";
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/delete/{id}")
-    public String deleteSong(@PathVariable("id") Long id, Model model){
+    @RequestMapping(method = {RequestMethod.GET}, path = "/delete/{id}")
+    public String deleteSongGet(@PathVariable("id") Long id, Model model){
+
+        return deleteSongInternal(id, model);
+    }
+
+    @RequestMapping(method = {RequestMethod.POST}, path = "/delete")
+    public String deleteSongPost(@RequestParam("id") Long id, Model model){
+
+        deleteSongInternal(id, model);
+
+        return "redirect:/";
+    }
+
+    private String deleteSongInternal(Long id, Model model) {
 
         songService.delete(id);
 
