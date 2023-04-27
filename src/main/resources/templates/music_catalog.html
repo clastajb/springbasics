@@ -62,7 +62,7 @@
 
 <table class="grid">
     <tr class="grid_header">
-        <th colspan="3">
+        <th colspan="4">
             song list !!
         </th>
     </tr>
@@ -75,6 +75,9 @@
         </td>
         <td th:text="'ID: ' + ${song.id}">
             id:
+        </td>
+        <td>
+            <a th:href="@{/delete/{id}(id=${song.id})}"><input type="button" value="X"/></a>
         </td>
     </tr>
 </table>
