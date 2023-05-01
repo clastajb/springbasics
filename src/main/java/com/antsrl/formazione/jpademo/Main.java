@@ -38,16 +38,19 @@ public class Main {
         entityManager.persist(Book.builder()
                 .Id(67L)
                 .title("nice book")
+                .anything("a value 1")
                 .build());
 
         entityManager.persist(Book.builder()
                 .Id(69L)
                 .title("good book")
+                .anything("a value 2")
                 .build());
 
         entityManager.persist(Book.builder()
                 .Id(890L)
                 .title("wonderful book")
+                .anything("a value 3")
                 .build());
 
     }

@@ -1,4 +1,5 @@
 package com.antsrl.formazione.jpademo.domain;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,5 +18,9 @@ public class Book {
 
     @Id
     private Long Id;
+
     private String title;
+
+    @Column(name = "any_column_name", nullable = false, unique = true, length = 16)
+    private String anything;
 }
