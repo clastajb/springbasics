@@ -1,12 +1,10 @@
 package com.antsrl.formazione.jpademo.domain;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 
 
 @Table(name = "book")
@@ -23,4 +21,8 @@ public class Book {
 
     @Column(name = "any_column_name", nullable = false, unique = true, length = 16)
     private String anything;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "publishing_date", nullable = false)
+    private LocalDate publishing;
 }
