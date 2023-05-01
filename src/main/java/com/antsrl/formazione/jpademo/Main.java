@@ -2,6 +2,7 @@ package com.antsrl.formazione.jpademo;
 
 import com.antsrl.formazione.jpademo.domain.Book;
 import com.antsrl.formazione.jpademo.domain.Category;
+import com.antsrl.formazione.jpademo.domain.Review;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -77,5 +78,23 @@ public class Main {
         book = Objects.requireNonNull(entityManager.find(Book.class, 3L));
         entityManager.remove(book);
 
+        // one-to-one review and EXISTING book
+        book = Objects.requireNonNull(entityManager.find(Book.class, 4L));
+        Review review = new Review();
+        review.setBook(book);
+        entityManager.persist(review);
+
+        // one-to-one review and NEW book
+        book = Book.builder()
+                .title("nice book")
+                .anything("a value 28")
+                .publishing(LocalDate.of(1996, 4, 18))
+                .category(Category.SCIENCE)
+                .build();
+        review = new Review();
+        review.setBook(book);
+        // must persist the Book BEFORE the Review
+        entityManager.persist(book);
+        entityManager.persist(review);
     }
 }
