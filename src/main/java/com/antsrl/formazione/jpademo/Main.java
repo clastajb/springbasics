@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Main {
 
@@ -65,6 +66,16 @@ public class Main {
                 .publishing(LocalDate.of(1989, 9, 23))
                 .category(Category.ESSAY)
                 .build());
+
+
+        // updating a book
+        Book book = Objects.requireNonNull(entityManager.find(Book.class, 1L));
+        book.setPublishing(LocalDate.now());
+        entityManager.persist(book);
+
+        // getting another book and removing it
+        book = Objects.requireNonNull(entityManager.find(Book.class, 3L));
+        entityManager.remove(book);
 
     }
 }
