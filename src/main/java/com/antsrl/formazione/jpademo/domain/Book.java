@@ -34,4 +34,7 @@ public class Book {
 
     @OneToOne(mappedBy = "book")
     private Review review;
+
+    @ManyToOne
+    private Publisher publisher;
 }

@@ -2,6 +2,7 @@ package com.antsrl.formazione.jpademo;
 
 import com.antsrl.formazione.jpademo.domain.Book;
 import com.antsrl.formazione.jpademo.domain.Category;
+import com.antsrl.formazione.jpademo.domain.Publisher;
 import com.antsrl.formazione.jpademo.domain.Review;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -9,6 +10,7 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -104,9 +106,30 @@ public class Main {
         book.setReview(review);
         review.setBook(book);
 
-        //  still need to persist both entities
+        // still need to persist both entities
         entityManager.persist(book);
         entityManager.persist(review);
 
+        // many-to-one
+        Publisher publisher = new Publisher();
+        book.setPublisher(publisher);
+        entityManager.persist(publisher);
+
+        // reset Entity Manager cache. let see how SQL fetches are handled with empty cache
+        entityManager.flush();
+        entityManager.clear();
+
+        // one-to-many
+        System.out.println("publisher is about to be fetched");
+
+        publisher = entityManager.find(Publisher.class, 1L);
+
+        System.out.println("publisher was fetched. books not used yet");
+
+        String bookTitles = publisher.getBookList().stream()
+                        .map(Book::getTitle)
+                        .collect(Collectors.joining(", "));
+
+        System.out.format("books %s where just fetched\n", bookTitles);
     }
 }
