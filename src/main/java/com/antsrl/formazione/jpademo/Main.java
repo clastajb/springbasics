@@ -35,11 +35,20 @@ public class Main {
 
     private static void doPersistenceStuff(EntityManager entityManager) {
 
-        Book book = new Book();
+        entityManager.persist(Book.builder()
+                .Id(67L)
+                .title("nice book")
+                .build());
 
-        book.setId(34L);
-        book.setTitle("Good Romance");
+        entityManager.persist(Book.builder()
+                .Id(69L)
+                .title("good book")
+                .build());
 
-        entityManager.persist(book);
+        entityManager.persist(Book.builder()
+                .Id(890L)
+                .title("wonderful book")
+                .build());
+
     }
 }
