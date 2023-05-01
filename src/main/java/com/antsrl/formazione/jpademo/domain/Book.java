@@ -31,4 +31,7 @@ public class Book {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Category category;
+
+    @OneToOne(mappedBy = "book")
+    private Review review;
 }

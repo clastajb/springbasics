@@ -96,5 +96,17 @@ public class Main {
         // must persist the Book BEFORE the Review
         entityManager.persist(book);
         entityManager.persist(review);
+
+        // one-to-one bi-direction
+        book = Objects.requireNonNull(entityManager.find(Book.class, 2L));
+        review = new Review();
+
+        book.setReview(review);
+        review.setBook(book);
+
+        //  still need to persist both entities
+        entityManager.persist(book);
+        entityManager.persist(review);
+
     }
 }
