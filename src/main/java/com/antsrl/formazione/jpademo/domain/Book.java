@@ -1,8 +1,7 @@
 package com.antsrl.formazione.jpademo.domain;
+
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +11,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @Id
@@ -25,4 +26,8 @@ public class Book {
     @Temporal(TemporalType.DATE)
     @Column(name = "publishing_date", nullable = false)
     private LocalDate publishing;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Category category;
 }
