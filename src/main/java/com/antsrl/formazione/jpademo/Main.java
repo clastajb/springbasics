@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class Main {
 
@@ -40,7 +39,6 @@ public class Main {
     private static void doPersistenceStuff(EntityManager entityManager) {
 
         entityManager.persist(Book.builder()
-                .Id(167L)
                 .title("nice book")
                 .anything("a value 10")
                 .publishing(LocalDate.of(1984, 9, 23))
@@ -48,7 +46,6 @@ public class Main {
                 .build());
 
         entityManager.persist(Book.builder()
-                .Id(169L)
                 .title("good book")
                 .anything("a value 20")
                 .publishing(LocalDate.of(2020, 10, 31))
@@ -56,14 +53,18 @@ public class Main {
                 .build());
 
         entityManager.persist(Book.builder()
-                .Id(1890L)
                 .title("wonderful book")
                 .anything("a value 30")
                 .publishing(LocalDate.of(2021, 3, 16))
                 .category(Category.ROMANCE)
                 .build());
 
+        entityManager.persist(Book.builder()
+                .title("nice book")
+                .anything("a value 18")
+                .publishing(LocalDate.of(1989, 9, 23))
+                .category(Category.ESSAY)
+                .build());
 
-        Objects.requireNonNull(entityManager.find(Book.class, 167L));
     }
 }
