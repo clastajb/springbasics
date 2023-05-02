@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Table(name = "book")
@@ -37,4 +39,11 @@ public class Book {
 
     @ManyToOne
     private Publisher publisher;
+
+    @ManyToMany(mappedBy = "bookList")
+    private List<Person> personList = new ArrayList<>();
+
+    public void addPerson(Person person){
+        personList.add(person);
+    }
 }

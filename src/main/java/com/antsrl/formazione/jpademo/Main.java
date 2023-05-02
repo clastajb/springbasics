@@ -1,9 +1,6 @@
 package com.antsrl.formazione.jpademo;
 
-import com.antsrl.formazione.jpademo.domain.Book;
-import com.antsrl.formazione.jpademo.domain.Category;
-import com.antsrl.formazione.jpademo.domain.Publisher;
-import com.antsrl.formazione.jpademo.domain.Review;
+import com.antsrl.formazione.jpademo.domain.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -131,5 +128,31 @@ public class Main {
                         .collect(Collectors.joining(", "));
 
         System.out.format("books %s where just fetched\n", bookTitles);
+
+
+        // many-to-many
+
+        Book book1 = entityManager.find(Book.class, 1L);
+        Book book2 = entityManager.find(Book.class, 2L);
+        Book book4 = entityManager.find(Book.class, 4L);
+
+        Person p1 = new Person();
+        p1.setName("mickey mouse");;
+        p1.addBook(book4);
+
+        Person p2 = new Person();
+        p2.setName("donald duck");
+        p2.addBook(book1);
+        p2.addBook(book4);
+
+        Person p3 = new Person();
+        p3.setName("donald duck");
+        p3.addBook(book1);
+        p3.addBook(book2);
+        p3.addBook(book4);
+
+        entityManager.persist(p1);
+        entityManager.persist(p2);
+        entityManager.persist(p3);
     }
 }
