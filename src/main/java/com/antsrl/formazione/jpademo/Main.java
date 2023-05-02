@@ -4,8 +4,10 @@ import com.antsrl.formazione.jpademo.domain.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -109,6 +111,7 @@ public class Main {
 
         // many-to-one
         Publisher publisher = new Publisher();
+        publisher.setBusinessName("amazing publisher LTD");
         book.setPublisher(publisher);
         entityManager.persist(publisher);
 
@@ -170,5 +173,48 @@ public class Main {
                 person.getBookList().stream()
                 .map(Book::getTitle)
                 .collect(Collectors.joining(", ")));
+
+
+        runJPQLStatements(entityManager);
+    }
+
+    private static void runJPQLStatements(EntityManager entityManager) {
+
+        // select all books
+        TypedQuery<Book> bookQuery = entityManager.createQuery("select b from Book b", Book.class);
+        List<Book> books = bookQuery.getResultList();
+        books.forEach(book -> System.out.format(
+                "a book in the list with id[%s] and title[%s]\n",
+                book.getId(),
+                book.getTitle()));
+
+        // local date params
+        TypedQuery<Book> parameterizedQuery = entityManager.createQuery(
+                "select b from Book b where b.publishing between :startDate and :endDate", Book.class);
+
+        parameterizedQuery.setParameter("startDate", LocalDate.of(1989, 1, 1));
+        parameterizedQuery.setParameter("endDate", LocalDate.of(1999, 12, 31));
+
+        List<Book> recentBooks = parameterizedQuery.getResultList();
+        recentBooks.forEach(book -> System.out.format(
+                "a RECENT book has id[%s] and title[%s], published on[%tF]\n",
+                book.getId(),
+                book.getTitle(),
+                book.getPublishing()));
+
+        // implicitly generated joins
+        TypedQuery<Book> implicitJoinQuery = entityManager.createQuery("select b from Book b where b.publisher.businessName like :publisherName", Book.class);
+        String publisherPartialName = "blish";
+        implicitJoinQuery.setParameter("publisherName", "%" + publisherPartialName + "%");
+
+        List<Book> publisherRelatedBooks = implicitJoinQuery.getResultList();
+        publisherRelatedBooks.forEach(book -> System.out.format(
+                "a book related to publisher [%s], has id[%s] and title[%s], published on[%tF] by [%s]\n",
+                publisherPartialName,
+                book.getId(),
+                book.getTitle(),
+                book.getPublishing(),
+                book.getPublisher().getBusinessName()));
+
     }
 }
