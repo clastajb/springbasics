@@ -154,5 +154,21 @@ public class Main {
         entityManager.persist(p1);
         entityManager.persist(p2);
         entityManager.persist(p3);
+
+        // reset Entity Manager cache. let see how SQL fetches are handled with empty cache
+        entityManager.flush();
+        entityManager.clear();
+
+        System.out.println("about to fetch a person");
+
+        Person person = Objects.requireNonNull(entityManager.find(Person.class, 3L));
+
+        System.out.println("person was fetched and we are about to fetch its book list!");
+
+        System.out.format("books from %s where just fetched and are: %s\n",
+                person.getName(),
+                person.getBookList().stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining(", ")));
     }
 }
