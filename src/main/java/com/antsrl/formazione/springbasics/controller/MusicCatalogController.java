@@ -31,7 +31,7 @@ public class MusicCatalogController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path="/")
-    public String addSong(@Valid @ModelAttribute SongDTO song, BindingResult bindingResult, Model model){
+    public String addSong(@Valid @ModelAttribute("song") SongDTO song, BindingResult bindingResult, Model model){
 
         List<SongDTO> songList = songService.getAllSongs();
 
