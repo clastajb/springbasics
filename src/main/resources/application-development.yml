@@ -26,4 +26,4 @@
           format_sql: true
           dialect: org.hibernate.dialect.H2Dialect
       hibernate:
-        ddl-auto: create
+        ddl-auto: none
