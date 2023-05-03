@@ -1,7 +1,7 @@
 package com.antsrl.formazione.springbasics.controller;
 
 import com.antsrl.formazione.springbasics.service.SongService;
-import com.antsrl.formazione.springbasics.uimodel.Song;
+import com.antsrl.formazione.springbasics.uimodel.SongDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +20,10 @@ public class MusicCatalogController {
     @RequestMapping(method= RequestMethod.GET, path="/")
     public String listAllSongs(Model model){
 
-        List<Song> songList = songService.getAllSongs();
+        List<SongDTO> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
-        model.addAttribute("song", Song
+        model.addAttribute("song", SongDTO
                 .builder()
                 .build());
 
@@ -31,9 +31,9 @@ public class MusicCatalogController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path="/")
-    public String addSong(@Valid @ModelAttribute Song song, BindingResult bindingResult, Model model){
+    public String addSong(@Valid @ModelAttribute SongDTO song, BindingResult bindingResult, Model model){
 
-        List<Song> songList = songService.getAllSongs();
+        List<SongDTO> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
 
@@ -64,10 +64,10 @@ public class MusicCatalogController {
 
         songService.delete(id);
 
-        List<Song> songList = songService.getAllSongs();
+        List<SongDTO> songList = songService.getAllSongs();
 
         model.addAttribute("songList", songList);
-        model.addAttribute("song", Song
+        model.addAttribute("song", SongDTO
                 .builder()
                 .build());
 

@@ -1,6 +1,6 @@
 package com.antsrl.formazione.springbasics.service;
 
-import com.antsrl.formazione.springbasics.uimodel.Song;
+import com.antsrl.formazione.springbasics.uimodel.SongDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,29 +12,29 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class SongService {
 
-    private final static List<Song> songList = Collections.synchronizedList(new ArrayList<>());
+    private final static List<SongDTO> songList = Collections.synchronizedList(new ArrayList<>());
 
     private final static AtomicLong songListLatestId = new AtomicLong();
 
     static{
 
-        addSongInternal(Song.builder()
+        addSongInternal(SongDTO.builder()
                 .title("Good Song")
                 .url("http://example.com/good_song")
                 .build());
 
-        addSongInternal(Song.builder()
+        addSongInternal(SongDTO.builder()
                 .title("Nice Song")
                 .url("http://example.com/nice_song")
                 .build());
 
-        addSongInternal(Song.builder()
+        addSongInternal(SongDTO.builder()
                 .title("Evil Song")
                 .url("http://example.com/evil_song")
                 .build());
     }
 
-    private static void addSongInternal(Song song) {
+    private static void addSongInternal(SongDTO song) {
 
         if(Objects.isNull(song.getId())){
             song.setId(songListLatestId.incrementAndGet());
@@ -43,11 +43,11 @@ public class SongService {
         songList.add(song);
     }
 
-    public List<Song> getAllSongs(){
+    public List<SongDTO> getAllSongs(){
         return songList;
     }
 
-    public void save(Song song) {
+    public void save(SongDTO song) {
         addSongInternal(song);
     }
 
