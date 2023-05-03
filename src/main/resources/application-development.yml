@@ -1,5 +1,7 @@
-  # hot-reload for thymeleaf templates
   spring:
+    # ----------------------------------
+    # hot-reload for thymeleaf
+    # ----------------------------------
     thymeleaf: # Thymeleaf
       cache: false
       mode: HTML
@@ -9,3 +11,19 @@
       static-locations: file:src/main/resources/static/
       cache:
         period: 0
+    # ----------------------------------
+    # database connection
+    # ----------------------------------
+    datasource:
+      url: jdbc:h2:tcp://localhost/~/h2_database/springbasics
+      driver-class-name: org.h2.Driver
+      username: springbasics
+      password: springbasics
+    jpa:
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+          dialect: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create
