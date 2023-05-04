@@ -3,6 +3,7 @@ package com.antsrl.formazione.springbasics.service;
 import com.antsrl.formazione.springbasics.domain.Song;
 import com.antsrl.formazione.springbasics.repository.SongRepository;
 import com.antsrl.formazione.springbasics.uimodel.SongDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class SongService {
     @Autowired
     private ConversionService conversionService;
 
+    @Transactional
     public List<SongDTO> getAllSongs(){
 
         return songRepository.findAll().stream()
@@ -27,12 +29,14 @@ public class SongService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void save(SongDTO song) {
         songRepository.save(
                 Objects.requireNonNull(
                         conversionService.convert(song, Song.class)));
     }
 
+    @Transactional
     public void delete(Long id) {
         songRepository.deleteById(id);
     }
